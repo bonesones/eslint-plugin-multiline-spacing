@@ -1,0 +1,18 @@
+{
+  "name": "eslint-plugin-multiline-spacing",
+  "version": "1.0.0",
+  "description": "ESLint rule: enforce blank lines before and after multiline JSX elements, and always for custom components.",
+  "main": "index.js",
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "jsx",
+    "formatting",
+    "spacing"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "peerDependencies": {
+    "eslint": ">=7.0.0"
+  }
+}
