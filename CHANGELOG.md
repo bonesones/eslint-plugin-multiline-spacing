@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1 (2025-09-13)
+
+- Fixed: Corrected `main` entry in package.json so the plugin loads properly in ESLint.
+
 ## 1.1.0 - 2025-09-13
 
 ### Added
