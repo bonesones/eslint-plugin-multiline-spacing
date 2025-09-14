@@ -1,0 +1,30 @@
+{
+  "name": "eslint-plugin-multiline-spacing",
+  "version": "1.0.0",
+  "description": "ESLint plugin to enforce blank lines around multiline/custom JSX elements and disallow them between single-line JSX siblings.",
+  "main": "lib/index.js",
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin",
+    "jsx",
+    "multiline",
+    "spacing"
+  ],
+  "author": "Dmitriy Frolov <dmitriyworkspace013@gmail.com> (https://github.com/bonesones)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bonesones/eslint-plugin-multiline-spacing.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bonesones/eslint-plugin-multiline-spacing/issues"
+  },
+  "homepage": "https://github.com/bonesones/eslint-plugin-multiline-spacing#readme",
+  "engines": {
+    "node": ">=14"
+  },
+  "peerDependencies": {
+    "eslint": ">=7"
+  }
+}
