@@ -1,103 +1,156 @@
-﻿\# eslint-plugin-multiline-spacing
+﻿# eslint-plugin-multiline-spacing
 
-Enforce blank lines before and after multiline JSX elements,
+Custom ESLint rule for enforcing consistent blank lines between JSX elements.
 
-and always for components with uppercase names.
+## 📖 Rule: `multiline-jsx-padding`
 
-\## Installation
+This rule enforces blank line padding around **custom** or **multiline** JSX elements, while preventing unnecessary blank lines between **single-line native elements**.
 
-\```bash
+---
 
-npm install --save-dev eslint-plugin-multiline-spacing
+### ✅ Correct
 
-\```
+```jsx
+// Single custom
+<div>
+  <CustomComponent />
+</div>
 
-Usage
+// Single multiline native
+<div>
+  <p>
+    multi
+    line
+  </p>
+</div>
 
-Add the plugin to your ESLint config:
+// Multiple custom
+<div>
+  <CustomOne />
 
-// .eslintrc.js
+  <CustomTwo />
+</div>
 
-module.exports = {
+// Multiple single-line natives (no blank lines between)
+<div>
+  <span></span>
+  <span></span>
+</div>
 
-plugins: ["multiline-spacing"],
+// Mixed: custom with single-line native
+<div>
+  <span></span>
 
-rules: {
+  <CustomOne />
 
-"multiline-spacing/multiline-jsx-padding": "warn"
+  <span></span>
+</div>
 
+// Mixed: multiline with single-line
+<div>
+  <p>
+    text
+    inside
+  </p>
+
+  <span></span>
+</div>
+
+// Mixed: multiline with custom
+<div>
+  <p>
+    text
+    inside
+  </p>
+
+  <CustomComponent />
+</div>
+```
+
+### ❌ Incorrect
+
+```jsx
+// Extra blank lines around single custom
+<div>
+
+  <CustomComponent />
+
+</div>
+
+// Missing blank line between customs
+<div>
+  <CustomOne />
+  <CustomTwo />
+</div>
+
+// Wrong blank line between natives
+<div>
+  <span></span>
+
+  <span></span>
+</div>
+
+// Missing blank line before custom
+<div>
+  <span></span>
+  <CustomOne />
+</div>
+
+// Missing blank line before multiline
+<div>
+  <span></span>
+  <p>
+    multi
+    line
+  </p>
+</div>
+```
+
+## 📦 Installation
+
+```bash
+npm install eslint-plugin-multiline-spacing --save-dev
+```
+
+## 🔧 Usage
+
+Add `multiline-spacing` to the plugins section of your `.eslintrc` configuration file.
+
+In your .eslintrc.json (or .eslintrc.js):
+
+```json
+{
+  "plugins": ["multiline-spacing"],
+  "rules": {
+    "multiline-spacing/multiline-jsx-padding": "error"
+  }
 }
+```
 
-};
+## 📝 Rule details
 
-Run ESLint:
+- **Custom JSX elements** (`<Custom />`, `<MyComponent />`)
+  Must be surrounded by blank lines unless they are the only/first/last child.
 
-npx eslint "src/\\*\_/\_.{js,jsx,ts,tsx}" --fix
+- **Multiline JSX elements**
 
-✅ Correct
+```html
+<p>text</p>
+```
 
-<div>
+Must be surrounded by blank lines unless they are the only/first/last child.
 
-<p>single line</p>
+- **Single-line native JSX elements**
 
-<p>
+```html
+<span>text</span>
+<div>one more text</div>
+```
 
-multiline
+No blank lines allowed between consecutive native single-line elements.
 
-content
+May sit directly next to each other.
 
-</p>
+- **Mixed content**
 
-<p>another single line</p>
-
-</div>
-
-<div>
-
-<CustomComponent />
-
-<CustomComponent>
-
-<span>Always requires padding</span>
-
-</CustomComponent>
-
-</div>
-
-❌ Incorrect
-
-<div>
-
-<p>single line</p>
-
-<p>
-
-multiline
-
-content
-
-</p>
-
-<p>another single line</p>
-
-</div>
-
-<div>
-
-<CustomComponent />
-
-<CustomComponent>
-
-<span>Missing required spacing</span>
-
-</CustomComponent>
-
-</div>
-
-Auto-fix
-
-This rule supports ESLint’s --fix option.
-
-When run with --fix, ESLint will automatically insert or remove the necessary empty lines.
-
-npx eslint "src/\\*\_/\_.{js,jsx,ts,tsx}" --fix
+If a custom or multiline element appears next to natives, it must be separated with blank lines.
