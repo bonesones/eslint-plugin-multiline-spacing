@@ -135,7 +135,9 @@ In your .eslintrc.json (or .eslintrc.js):
 - **Multiline JSX elements**
 
 ```html
-<p>text</p>
+<p>
+  this is multiline JSX element
+</p>
 ```
 
 Must be surrounded by blank lines unless they are the only/first/last child.
