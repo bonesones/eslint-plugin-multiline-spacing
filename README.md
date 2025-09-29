@@ -1,22 +1,20 @@
 ﻿# eslint-plugin-multiline-spacing
 
-Custom ESLint rule for enforcing consistent blank lines between JSX elements.
+Custom ESLint rule for enforcing consistent blank lines between elements.
 
-## 📖 Rule: `multiline-jsx-padding`
+## 📖 Rule: `multiline-padding`
 
-This rule enforces blank line padding around **custom** or **multiline** JSX elements, while preventing unnecessary blank lines between **single-line native elements**.
+This rule enforces blank line padding around **custom** or **multiline** JSX elements and JS/TS blocks.
 
 ---
 
 ### ✅ Correct
 
 ```jsx
-// Single custom
 <div>
   <CustomComponent />
 </div>
 
-// Single multiline native
 <div>
   <p>
     multi
@@ -24,20 +22,17 @@ This rule enforces blank line padding around **custom** or **multiline** JSX ele
   </p>
 </div>
 
-// Multiple custom
 <div>
   <CustomOne />
 
   <CustomTwo />
 </div>
 
-// Multiple single-line natives (no blank lines between)
 <div>
   <span></span>
   <span></span>
 </div>
 
-// Mixed: custom with single-line native
 <div>
   <span></span>
 
@@ -46,7 +41,6 @@ This rule enforces blank line padding around **custom** or **multiline** JSX ele
   <span></span>
 </div>
 
-// Mixed: multiline with single-line
 <div>
   <p>
     text
@@ -56,7 +50,6 @@ This rule enforces blank line padding around **custom** or **multiline** JSX ele
   <span></span>
 </div>
 
-// Mixed: multiline with custom
 <div>
   <p>
     text
@@ -70,33 +63,28 @@ This rule enforces blank line padding around **custom** or **multiline** JSX ele
 ### ❌ Incorrect
 
 ```jsx
-// Extra blank lines around single custom
 <div>
 
   <CustomComponent />
 
 </div>
 
-// Missing blank line between customs
 <div>
   <CustomOne />
   <CustomTwo />
 </div>
 
-// Wrong blank line between natives
 <div>
   <span></span>
 
   <span></span>
 </div>
 
-// Missing blank line before custom
 <div>
   <span></span>
   <CustomOne />
 </div>
 
-// Missing blank line before multiline
 <div>
   <span></span>
   <p>
@@ -104,6 +92,60 @@ This rule enforces blank line padding around **custom** or **multiline** JSX ele
     line
   </p>
 </div>
+```
+
+### ✅ Correct
+
+```js
+function example() {
+  const a = { x: 1 };
+
+  const b = {
+    x: 1,
+    y: 2,
+  };
+
+  const c = { x: 3 };
+}
+
+test: () => {
+  const first = {
+    a: 1,
+  };
+
+  const middle = 2;
+
+  const last = {
+    b: 3,
+  };
+};
+
+doSomething();
+
+longCall(arg1, arg2);
+
+anotherCall();
+```
+
+### ❌ Incorrect
+
+```js
+const a = { x: 1 };
+const b = {
+  x: 1,
+  y: 2,
+};
+const c = { x: 3 };
+
+function test() {
+  const first = {
+    a: 1,
+  };
+  const middle = 2;
+  const last = {
+    b: 3,
+  };
+}
 ```
 
 ## 📦 Installation
@@ -122,37 +164,7 @@ In your .eslintrc.json (or .eslintrc.js):
 {
   "plugins": ["multiline-spacing"],
   "rules": {
-    "multiline-spacing/multiline-jsx-padding": "error"
+    "multiline-spacing/multiline-padding": "error"
   }
 }
 ```
-
-## 📝 Rule details
-
-- **Custom JSX elements** (`<Custom />`, `<MyComponent />`)
-  Must be surrounded by blank lines unless they are the only/first/last child.
-
-- **Multiline JSX elements**
-
-```html
-<p>
-  this is multiline JSX element
-</p>
-```
-
-Must be surrounded by blank lines unless they are the only/first/last child.
-
-- **Single-line native JSX elements**
-
-```html
-<span>text</span>
-<div>one more text</div>
-```
-
-No blank lines allowed between consecutive native single-line elements.
-
-May sit directly next to each other.
-
-- **Mixed content**
-
-If a custom or multiline element appears next to natives, it must be separated with blank lines.
